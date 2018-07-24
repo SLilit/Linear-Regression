@@ -24,6 +24,37 @@ def predict(train_row, weights):
 
 
     
+def linear_regression(train, label, weights, iters, alpha):
+    bias = [0, 0, 0]
+    n = len(train)
+    loss1 = 1  
+    while iters != 0:
+        loss = 0
+        for i in range(n):
+            prediction = predict(train[i], weights)
+            loss += (prediction - label[i])**2
+            for j in range(len(bias)):
+                bias[j] += (prediction - label[i])*train[i][j]
+        loss = loss/(2*n)
+        if loss < loss1:
+            loss1 = loss
+            for i in range(len(weights)):
+                weights[i] -= alpha*bias[i]/n
+        else:
+            break
+        
+        iters -= 1
+        #print (loss)
+              
+    return weights
 
+for i in range(len(alpha)):
+    update = linear_regression(X_train, Y_train, new_weights, 100, alpha[i])
+    new_weights = update
+    w.append([alpha[i], 100, new_weights[0], new_weights[1], new_weights[2]])
+    #print (new_weights, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    
+
+np.savetxt(sys.argv[2], w, delimiter = ",")
 
 
