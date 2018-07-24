@@ -44,7 +44,6 @@ def linear_regression(train, label, weights, iters, alpha):
             break
         
         iters -= 1
-        #print (loss)
               
     return weights
 
@@ -52,7 +51,6 @@ for i in range(len(alpha)):
     update = linear_regression(X_train, Y_train, new_weights, 100, alpha[i])
     new_weights = update
     w.append([alpha[i], 100, new_weights[0], new_weights[1], new_weights[2]])
-    #print (new_weights, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     
 
 np.savetxt(sys.argv[2], w, delimiter = ",")
